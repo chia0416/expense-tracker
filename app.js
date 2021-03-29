@@ -1,5 +1,6 @@
-// 載入 express 並建構應用程式伺服器
-const express = require("express");
+const express = require('express');
+require('./config/mongoose')
+
 const app = express();
 
 // 設定首頁路由

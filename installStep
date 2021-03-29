@@ -26,12 +26,12 @@
 //設定版本控制
   git init
   .gitignore
-  git add + git commit
+  git add + git commit -m
 
 //安裝Mongoose資料庫(串接mongoDB)
   npm i mongoose
     const mongoose = require('mongoose')
-    mongoose.connect('mongodb://localhost/monogdb的資料名稱', { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect('mongodb://localhost/(monogdb的資料名稱)', { useNewUrlParser: true, useUnifiedTopology: true })
   // 取得資料庫連線狀態
     const db = mongoose.connection
   // 連線異常
@@ -53,6 +53,7 @@
         required: true // 這是個必填欄位
         }
     })
+  module.exports = mongoose.model('Todo', todoSchema)
 
 //建立Seeder腳本(後續彙整合)
   models -> seeds -> (name)Seeder.js
@@ -66,9 +67,20 @@
     //此處新增資料
       db.once('open', () => {
         console.log('mongodb connected!')
+          for (let i = 0; i < 10; i++) {
+          Todo.create({ name: 'name-' + i })
+          }
+        console.log('done')
       })
   // node 資料路徑即可新增
-  // package.json -> seed : "node 路徑" <<以後npm run seed 即可
+  // package.json -> seed : "node models/seeds/(js名稱)" <<以後npm run seed 即可
+
+//重構mongoose
+  config/mongoose.js
+  將資料移入 並新增module.exports = db
+  app.js => ('./config/mongoose') 
+  (name)Seeder.js => const db = require('../../config/mongoose')
+    db.once資料保留用來新增資料
 
 //設定Handlebars
   npm install express-handlebars
