@@ -5,7 +5,10 @@ const Category = require('../../models/category')
 
 // 設定首頁路由
 router.get('/', (req, res) => {
-  res.render('index')
+  Record.find()
+  .lean()
+  .then(records => res.render('index', {records}))
+  .catch(error => console.error(error))
   })
 
   module.exports = router
