@@ -5,13 +5,13 @@ const recordSchema = new Schema({
     type: String, 
     required: true, 
   },
-  category: {
-    type: String,
-    required: true,
-  },
   date: {
     type: Date,
     default: Date.now,
+  },
+  categoryName: {
+    type: String,
+    required: true,
   },
   amount: {
     type: Number,
@@ -22,4 +22,4 @@ const recordSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Record", recordSchema);
+module.exports = mongoose.model('Record', recordSchema);

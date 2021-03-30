@@ -5,31 +5,31 @@ db.once('open', () => {
   Record.create(
     {
       name: "午餐",
-      category: "https://fontawesome.com/icons/utensils?style=solid",
+      categoryName: "餐飲食品",
       date: "2021/03/20",
       amount: "80",
     },
     {
       name: "捷運",
-      category: "https://fontawesome.com/icons/shuttle-van?style=solid",
+      categoryName: "交通出行",
       date: "2021/03/20",
       amount: "60",
     },
     {
       name: "電影:金剛大戰哥吉拉",
-      category: "https://fontawesome.com/icons/grin-beam?style=solid",
+      categoryName: "休閒娛樂",
       date: "2021/03/20",
       amount: "120",
     },
     {
       name: "租金",
-      category: "https://fontawesome.com/icons/home?style=solid",
+      categoryName: "家居物業",
       date: "2021/03/10",
       amount: "8000",
     },
     {
       name: "掉錢",
-      category: "https://fontawesome.com/icons/pen?style=solid",
+      categoryName: "其他",
       date: "2021/03/20",
       amount: "100",
     }
