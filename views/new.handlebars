@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <form action="/records" method="POST">
+    <div class="new-name">
+      <label for="name">名稱:</label>
+      <input type="text" id="name" name="name" value="a"required>
+    </div>
+    <div class="new-date">
+      <label for="date">日期:</label>
+      <input type="date" id="date" name="date" value="2020-07-22" required>
+    </div>
+    <div class="new-category">
+      <label for="category">類別:</label>
+      <select name="category" id="category">
+        <option>家居物業</option>
+        <option>交通出行</option>
+        <option>休閒娛樂</option>
+        <option>餐飲食品</option>
+        <option>其他</option>
+      </select>
+    </div>
+    <div class="new-amount">
+      <label for="amount">金額:</label>
+      <input type="text" id="amount" name="amount" min="0" maxlength="8" required>
+    </div>
+  <button type="submit"> Create </button>
+  </form>
+</div>

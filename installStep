@@ -96,6 +96,13 @@
     res.render('index')
   })
 
+//設定body-parser
+  npm install body-parser
+  //引用body-parser
+  const bodyParser = require('body-parser')
+  app.use(bodyParser.urlencoded({ extend: true }))
+
+
 //重構路由器
   routes/index.js
   routes/modules/homes.js

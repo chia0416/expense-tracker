@@ -9,8 +9,10 @@ const recordSchema = new Schema({
     default: Date.now,
   },
   category: {
-    name: String,
-    icon: String,
+    type: String,
+  },
+  categoryIcon:{
+    type: String,
   },
   amount: {
     type: Number,

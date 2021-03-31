@@ -2,7 +2,7 @@
   <table class="table table-striped table-hover">
     {{#each records}}
     <tr>
-      <td>{{{ this.category.icon }}}</td>
+      <td>{{{ this.categoryIcon }}}</td>
       <td>
         <div class="index-name">{{ this.name }}</div>
         <small class="index-date">{{ this.date }}</small>
@@ -15,4 +15,9 @@
     </tr>
     {{/each}}
   </table>
+  <div class="index-new">
+    <form action="/records/new" method="GET">
+        <button type="submit">Create</button>      
+    </form>
+  </div>
 </div>
