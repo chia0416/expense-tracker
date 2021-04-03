@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(routes)
 
+app.use(express.static("public"));
+
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
   })

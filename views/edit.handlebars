@@ -1,19 +1,19 @@
-<div class="container new-page">
-  
+<div class="container edit-page">
+
   <div class="box">
-    <h2>請輸入支出</h2>
-    <form action="/records/new" method="POST">
+    <h2>請修改支出</h2>
+    <form action="/records/edit/{{record._id}}" method="POST">
       <div class="form-group">
         <label for="name">名稱:</label>
-        <input class="input-box"type="text" id="name" name="name" value="" required>
+        <input class="input-box" type="text" id="name" name="name" value="{{record.name}}" required>
       </div>
       <div class="form-group">
         <label for="date">日期:</label>
-        <input class="input-box" type="date" id="date" name="date" value="2020-07-22" required>
+        <input class="input-box" type="date" id="date" name="date" value="{{record.date}}" required>
       </div>
       <div class="form-group">
         <label for="category">類別:</label>
-        <select class="input-box" name="category" id="category">
+        <select class="input-box" name="category" id="category" value="record.category">
           <option>家居物業</option>
           <option>交通出行</option>
           <option>休閒娛樂</option>
@@ -23,10 +23,10 @@
       </div>
       <div class="form-group">
         <label for="amount">金額:</label>
-        <input class="input-box" type="text" id="amount" name="amount" min="0" maxlength="8" required>
+        <input class="input-box" type="text" id="amount" name="amount" min="0" maxlength="8" value="{{record.amount}}" required>
       </div>
       <div class="d-flex">
-      <button type="submit" class="edit-button btn btn-outline-secondary "> Create </button>
+        <button type="submit" class="edit-button btn btn-outline-secondary "> Create </button>
       </div>
     </form>
   </div>
