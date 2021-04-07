@@ -23,9 +23,8 @@ db.once("open", () => {
       name: "其他",
       icon: '<i class="fas fa-pen"></i>',
     }
-  )
-  .then(() => {
+  ).then(() => {
     console.log("categorySeeder done!");
-    return db.close()
-  })
+    return db.close();
+  });
 });

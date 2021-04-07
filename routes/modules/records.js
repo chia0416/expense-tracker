@@ -28,7 +28,6 @@ router.post('/new', (req, res) => {
 //修改頁面
 router.get("/edit/:id", (req, res) => {
   const id = req.params.id;
- 
   console.log('edit page');
   return Record.findById(id)
     .lean()
@@ -36,22 +35,28 @@ router.get("/edit/:id", (req, res) => {
     .catch((error) => console.log(error));
 }); 
 
-router.post('/edit/:id', (req, res) => {
-  console.log('edited action')
-  const id = req.params.id
-  const {name, date, category, amount} = req.body
-  return Record.findById(id)
-  .then(record => {
-    record.name = name
-    record.date = date
-    record.category = category
-    record.amount = amount
-    return record.save()
-  })
-  .then(() => res.redirect('/'))
-  .catch(error => console.log(error))
-})
+router.post("/edit/:id", (req, res) => {
+  console.log("edited action");
+  const id = req.params.id;
+  const { name, date, category, amount } = req.body;
+  Category.findOne({ name: category })
+    .lean()
+    .then((categoryModel) => {
+      Record.findById(id)
+        .then((record) => {
+          record.name = name;
+          record.date = date;
+          record.category = category;
+          record.amount = amount;
+          record.categoryIcon = categoryModel.icon
+          return record.save();
+        })
+        .then(() => res.redirect("/"))
+        .catch((error) => console.log(error));
+    });
+});
 
+//刪除頁面
 router.post('/delete/:id', (req, res) => {
   console.log('delete action')
   const id = req.params.id
@@ -60,5 +65,6 @@ router.post('/delete/:id', (req, res) => {
   .then(res.redirect('/'))
   .catch(error => console.log(error))
 })
+
 
 module.exports = router;
