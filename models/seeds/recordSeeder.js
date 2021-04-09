@@ -1,7 +1,7 @@
-const db = require('../../config/mongoose')
-const Record = require('../record')
+const db = require("../../config/mongoose");
+const Record = require("../record");
 
-db.once('open', () => {
+db.once("open", () => {
   Record.create(
     {
       name: "午餐",
@@ -12,7 +12,7 @@ db.once('open', () => {
     },
     {
       name: "捷運",
-      category:"交通出行",
+      category: "交通出行",
       categoryIcon: '<i class="fas fa-shuttle-van"></i>',
       date: "2021-03-20",
       amount: "60",
@@ -38,11 +38,8 @@ db.once('open', () => {
       date: "2021-03-20",
       amount: "100",
     }
-  )
-  .then(() =>{
-  console.log("recodeSeeder Done!");
-  return db.close
-  }) 
-
+  ).then(() => {
+    console.log("recodeSeeder Done!");
+    return db.close;
+  });
 });
-

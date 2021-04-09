@@ -10,7 +10,7 @@ const recordSchema = new Schema({
   category: {
     type: String,
   },
-  categoryIcon:{
+  categoryIcon: {
     type: String,
   },
   amount: {
