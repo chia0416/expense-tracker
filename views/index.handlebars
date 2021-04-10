@@ -38,7 +38,7 @@
         <form action="/records/edit/{{this._id}}" method="GET">
           <button type="submit" class="index-edit btn btn-light-sm"><i class="fas fa-edit"></i></button>
         </form>
-        <form action="/records/delete/{{this._id}}" method="POST">
+        <form action="/records/{{this._id}}?_method=DELETE" method="POST">
           <button type="submit" class="index-delete btn btn-light-sm"><i class="far fa-trash-alt"></i></button>
         </form>
       </td>

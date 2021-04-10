@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 require('./config/mongoose')
 const routes = require('./routes')
 const bodyParser = require('body-parser')
+const methodOverride = require("method-override"); 
 
 const app = express();
 
@@ -11,10 +12,13 @@ app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(methodOverride("_method"));
+
 app.use(routes)
 
 app.use(express.static("public"));
 
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
+  
   })
