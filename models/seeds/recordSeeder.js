@@ -32,11 +32,11 @@ db.once("open", () => {
       amount: "8000",
     },
     {
-      name: "掉錢",
+      name: "學費",
       category: "其他",
       categoryIcon: '<i class="fas fa-pen"></i>',
       date: "2021-03-20",
-      amount: "100",
+      amount: "10000",
     }
   ).then(() => {
     console.log("recodeSeeder Done!");

@@ -39,6 +39,7 @@ router.put("/:id", (req, res) => {
   console.log("edited action");
   const id = req.params.id;
   const { name, date, category, amount } = req.body;
+  
   Category.findOne({ name: category })
     .lean()
     .then((categoryModel) => {

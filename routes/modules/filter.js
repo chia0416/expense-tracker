@@ -4,6 +4,7 @@ const Record = require("../../models/record");
 
 router.post("/", (req, res) => {
   const keyword = req.body.keyword;
+
   let totalAmount = 0;
   console.log(req.body);
   Record.find({
