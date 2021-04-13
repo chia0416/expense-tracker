@@ -10,7 +10,7 @@ router.get("/new", (req, res) => {
 ////new>>
 router.post("/", (req, res) => {
   console.log("Created page opened");
-  Category.findOne({ name: req.body.category })
+  return Category.findOne({ name: req.body.category })
     .lean()
     .then((category) => {
       Record.create({
@@ -19,10 +19,10 @@ router.post("/", (req, res) => {
         category: req.body.category,
         amount: req.body.amount,
         categoryIcon: category.icon,
-      });
-    })
-    .then(res.redirect("/"))
-    .catch((error) => console.log(error));
+      })
+        .then(res.redirect("/"))
+        .catch((error) => console.log(error));
+    });
 });
 
 //修改頁面
@@ -39,8 +39,8 @@ router.put("/:id", (req, res) => {
   console.log("edited action");
   const id = req.params.id;
   const { name, date, category, amount } = req.body;
-  
-  Category.findOne({ name: category })
+
+  return Category.findOne({ name: category })
     .lean()
     .then((categoryModel) => {
       Record.findById(id)
