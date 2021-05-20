@@ -21,31 +21,16 @@ router.get("/", async (req, res) => {
     ]);
     //比對icon並新增iconName
     let categories = await Category.find().lean();
-    // let categories = await Category.aggregate([
-    //   {
-    //   $project: {
-    //       name: 1,
-    //       icon: 1,
-    //     },
-    //   },
-    // ]);
-    let i = 1
-    let j = 1
-    records.forEach((record , i) => {
-      categories.find((item) => {
-      if(item.name === record.category){
-        record.iconName = item.icon
-        return i = 1
-      }
-      console.log(`A.${i++} + ${record.iconName} + ${Date.now()}`)
-      })
-      console.log(`B.${j++} + ${record.iconName} + ${Date.now()}`);
-      
-      // record.iconName = categories.find(
-      //   (item) => item.name === record.category
-      // ).icon;
-    });
 
+
+    records.forEach((record ) =>  {
+      categories.find((item) => {
+        if(item.name === record.category){
+        record.iconName = item.icon
+        }    
+      })
+    });
+    
     //算總金額
     let totalAmount = 0;
     records.forEach((record) => {
@@ -53,7 +38,6 @@ router.get("/", async (req, res) => {
     });
 
     return res.render("index", {
-      categories,
       totalAmount,
       records,
     });
