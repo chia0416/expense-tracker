@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const category = require('./category')
+
 const recordSchema = new Schema({
   name: {
     type: String,
@@ -8,9 +10,6 @@ const recordSchema = new Schema({
     type: String,
   },
   category: {
-    type: String,
-  },
-  categoryIcon: {
     type: String,
   },
   amount: {

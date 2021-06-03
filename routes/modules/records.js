@@ -11,12 +11,12 @@ router.get("/new", (req, res) => {
 ////new>>
 router.post("/", (req, res) => {
   console.log("Created page opened");
-  const { name, category, date, amount } = req.body;
+  const { name, category, date, amount, } = req.body;
   Record.create({
-    name: name,
-    category: category,
-    date: date,
-    amount: amount,
+    name,
+    category,
+    date,
+    amount,
   })
     .then(() => {
       res.redirect("/");
