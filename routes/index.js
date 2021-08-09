@@ -5,7 +5,7 @@ const records = require('./modules/records')
 const category = require('./modules/filter')
 const users = require('./modules/users')
 
-router.use('/', users)
+router.use('/users', users)
 router.use('/', home)
 router.use('/records', records)
 router.use('/category', category)
