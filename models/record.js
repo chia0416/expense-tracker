@@ -1,23 +1,23 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const category = require('./category')
 
 const recordSchema = new Schema({
   name: {
-    type: String,
+    type: String
   },
   date: {
-    type: String,
+    type: String
   },
   category: {
-    type: String,
+    type: String
   },
   amount: {
     type: Number,
     min: 0,
     get: (v) => Math.round(v),
-    set: (v) => Math.round(v),
-  },
-});
+    set: (v) => Math.round(v)
+  }
+})
 
-module.exports = mongoose.model("Record", recordSchema);
+module.exports = mongoose.model('Record', recordSchema)
