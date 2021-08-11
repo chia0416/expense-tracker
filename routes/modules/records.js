@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
-const Category = require('../../models/category')
 
 // 新增頁面
 router.get('/new', (req, res) => {
@@ -58,7 +57,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const _id = req.params.id
   const userId = req.user._id
-  Record.findOne({ _id, usrId })
+  Record.findOne({ _id, userId })
     .then((record) => record.remove())
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error))
