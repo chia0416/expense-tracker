@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const category = require('./category')
 
 const recordSchema = new Schema({
   name: {
@@ -17,6 +16,12 @@ const recordSchema = new Schema({
     min: 0,
     get: (v) => Math.round(v),
     set: (v) => Math.round(v)
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    require: true
   }
 })
 

@@ -10,15 +10,17 @@ router.get('/new', (req, res) => {
 
 /// /new>>
 router.post('/', (req, res) => {
-  console.log('Created page opened')
+  const userId = req.user._id
   const { name, category, date, amount } = req.body
   Record.create({
     name,
     category,
     date,
-    amount
+    amount,
+    userId
   })
-    .then(() => {
+    .then((record) => {
+      console.log(record)
       res.redirect('/')
     })
     .catch((e) => console.log(e))
@@ -26,9 +28,10 @@ router.post('/', (req, res) => {
 
 // 修改頁面
 router.get('/edit/:id', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
   console.log('edit page')
-  Record.findById(id)
+  Record.findOne({ _id, userId })
     .lean()
     .then((record) => res.render('edit', { record }))
     .catch((error) => console.log(error))
@@ -36,10 +39,10 @@ router.get('/edit/:id', (req, res) => {
 
 // post("/edit/:id"
 router.put('/:id', (req, res) => {
-  console.log('edited action')
-  const id = req.params.id
+  const _id = req.params.id
+  const userId = req.user._id
   const { name, date, category, amount } = req.body
-  return Record.findById(id)
+  return Record.findOne({ _id, userId })
     .then((record) => {
       record.name = name
       record.date = date
@@ -53,9 +56,9 @@ router.put('/:id', (req, res) => {
 
 // 刪除頁面post("/delete/:id"
 router.delete('/:id', (req, res) => {
-  console.log('delete action')
-  const id = req.params.id
-  Record.findById(id)
+  const _id = req.params.id
+  const userId = req.user._id
+  Record.findOne({ _id, usrId })
     .then((record) => record.remove())
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error))

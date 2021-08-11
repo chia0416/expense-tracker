@@ -6,9 +6,9 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  passport.use(new LocalStrategy({ usernameField: 'email'}, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
     User.findOne({ email })
-    .then(user => {
+      .then(user => {
         if (!user) {
           return done(null, false, { message: 'That email is not registered!' })
         }
@@ -17,7 +17,7 @@ module.exports = app => {
         }
         return done(null, user)
       })
-      .catch(err => done(err, false))      
+      .catch(err => done(err, false))
   }))
 
   passport.serializeUser((user, done) => {

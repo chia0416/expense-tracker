@@ -6,7 +6,6 @@ const category = require('./modules/filter')
 const users = require('./modules/users')
 const { authenticator } = require('../middleware/auth')
 
-
 router.use('/users', users)
 router.use('/', authenticator, home)
 router.use('/records', authenticator, records)

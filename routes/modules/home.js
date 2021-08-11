@@ -6,43 +6,29 @@ const Record = require('../../models/record')
 
 // 設定首頁路由
 router.get('/', async (req, res) => {
-  try {
-    // 轉為物件
-    const records = await Record.aggregate([
-      {
-        $project: {
-          id: 1,
-          name: 1,
-          category: 1,
-          date: 1,
-          amount: 1
-        }
-      }
-    ])
-    // 比對icon並新增iconName
-    const categories = await Category.find().lean()
+  const userId = req.user._id
+  const records = Record.find({ userId }).lean()
+  const categories = Category.find().lean()
 
-    records.forEach((record) => {
-      categories.find((item) => {
-        if (item.name === record.category) {
-          record.iconName = item.icon
-        }
+  Promise.all([records, categories])
+    .then(results => {
+      const [records, categories] = results
+
+      console.log(records)
+      records.forEach(record => {
+        categories.find(category => {
+          if (category.name === record.category) {
+            record.iconName = category.icon
+          }
+        })
       })
+      let totalAmount = 0
+      records.forEach((record) => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
     })
-
-    // 算總金額
-    let totalAmount = 0
-    records.forEach((record) => {
-      totalAmount += record.amount
-    })
-
-    return res.render('index', {
-      totalAmount,
-      records
-    })
-  } catch (e) {
-    console.log(e)
-  }
+    .catch(e => console.log(e))
 })
 
 module.exports = router
