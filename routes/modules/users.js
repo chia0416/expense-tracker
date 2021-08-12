@@ -51,8 +51,11 @@ router.post('/register', (req, res) => {
         email,
         password
       })
-        .then(() => res.redirect('/'))
-        .catch(err => console.log(err))
+      .then(() => {
+        const success_msg = '你已經成功註冊。'
+        res.render('login', { email, password, success_msg})
+      })
+      .catch(err => console.log(err))
     }
   })
 })

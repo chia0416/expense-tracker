@@ -6,14 +6,16 @@
       <form action="/users/login" method="POST" class="needs-validation" novalidate>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="請輸入信箱" required>
+          <input type="email" id="email" name="email" class="form-control" value="{{email}}" placeholder="請輸入信箱"
+            required>
           <div id="invalid-feedback" class="invalid-feedback">
             請輸入信箱
           </div>
         </div>
         <div class="mb-3">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="請輸入密碼" required>
+          <input type="password" id="password" name="password" class="form-control" value="{{password}}"
+            placeholder="請輸入密碼" required>
         </div>
         <div id="invalid-feedback" class="invalid-feedback">
           請輸入密碼
