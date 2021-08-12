@@ -13,8 +13,6 @@ router.get('/', async (req, res) => {
   Promise.all([records, categories])
     .then(results => {
       const [records, categories] = results
-
-      console.log(records)
       records.forEach(record => {
         categories.find(category => {
           if (category.name === record.category) {

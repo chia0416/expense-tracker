@@ -19,7 +19,6 @@ router.post('/', (req, res) => {
     userId
   })
     .then((record) => {
-      console.log(record)
       res.redirect('/')
     })
     .catch((e) => console.log(e))
@@ -29,7 +28,6 @@ router.post('/', (req, res) => {
 router.get('/edit/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  console.log('edit page')
   Record.findOne({ _id, userId })
     .lean()
     .then((record) => res.render('edit', { record }))
