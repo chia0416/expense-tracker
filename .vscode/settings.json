@@ -1,8 +1,4 @@
 {
-  "cSpell.words": [
-    "exphbs"
-  ],
-  "cSpell.ignoreWords": [
-    "resave"
-  ]
+  "cSpell.words": ["exphbs"],
+  "cSpell.ignoreWords": ["mongodb", "resave", "uri"]
 }
