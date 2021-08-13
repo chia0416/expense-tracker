@@ -6,6 +6,11 @@
 
 ![image](https://github.com/chia0416/expense-tracker/blob/main/public/HomePage.jpg)
 
+# 使用者體驗帳號
+
+帳號:root@example.com
+密碼:12345678
+
 # Features - 產品功能
 
 <ol>
