@@ -5,15 +5,17 @@
     </h1>
     <div class=" text-center col-3">
       <form action="/records/new" method="GET">
-        <button type="submit" class="index-new btn btn-outline-secondary"><i class="fas fa-plus-circle mr-1 ">新增</i></button>
+        <button type="submit" class="index-new btn btn-outline-secondary"><i
+            class="fas fa-plus-circle mr-1 ">新增</i></button>
       </form>
     </div>
     <div class="index-category col-3">
       <form action="/category" method="POST">
         <label class="form-label" for="keyword"></label>
         <input class="form-control btn-category-inner" list="categories" name="keyword" placeholder="類別" id="keyword"
-          autocomplete="off"  onchange="submit()" required>
+          autocomplete="off" onchange="submit()" required>
         <datalist id="categories">
+          <option>全部類別</option>
           <option>家居物業</option>
           <option>交通出行</option>
           <option>休閒娛樂</option>
@@ -39,7 +41,8 @@
           <button type="submit" class="index-edit btn btn-light-sm"><i class="fas fa-edit"></i></button>
         </form>
         <form action="/records/{{this._id}}?_method=DELETE" method="POST">
-          <button type="submit" class="index-delete btn btn-light-sm" onclick="return confirmDelete();"><i class="far fa-trash-alt"></i></button>
+          <button type="submit" class="index-delete btn btn-light-sm" onclick="return confirmDelete();"><i
+              class="far fa-trash-alt"></i></button>
         </form>
       </td>
     </tr>

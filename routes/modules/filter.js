@@ -6,7 +6,7 @@ const Category = require('../../models/category')
 router.post('/', async (req, res) => {
   const keyword = req.body.keyword
   try {
-    // 轉為物件
+    // 選取資訊
     const records = await Record.aggregate([
       {
         $project: {
@@ -30,6 +30,9 @@ router.post('/', async (req, res) => {
         }
       }
     ])
+    if(keyword === '全部類別'){
+      return res.redirect('/')
+    }
     // 比對icon並新增iconName
     const categories = await Category.find().lean()
     records.forEach((record) => {
