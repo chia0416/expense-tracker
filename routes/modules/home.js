@@ -1,32 +1,67 @@
 const express = require('express')
 const Category = require('../../models/category')
+const Month = require('../../models/month')
 
 const router = express.Router()
 const Record = require('../../models/record')
 
-// 設定首頁路由
 router.get('/', async (req, res) => {
-  const userId = req.user._id
-  const records = Record.find({ userId }).lean()
-  const categories = Category.find().lean()
-
-  Promise.all([records, categories])
-    .then(results => {
-      const [records, categories] = results
-      records.forEach(record => {
-        categories.find(category => {
-          if (category.name === record.category) {
-            record.iconName = category.icon
-          }
-        })
+  try {
+    // 選取資訊
+    const records = await Record.aggregate([
+      {
+        $project: {
+          userId: 1,
+          id: 1,
+          name: 1,
+          category: 1,
+          date: 1,
+          amount: 1,
+          year: {$substr:["$date",0,4]},
+          month: {$substr:["$date",5,2]},
+        },
+      },
+      {
+        $match: {
+        userId: req.user._id,
+        }
+      }, 
+    ])
+    //比對月份
+    let monthList = []
+    const monthData = await Month.find().lean()
+    records.forEach((record,index) => {
+      monthData.find((item) => {
+       if ( item.nameInAlpha === record.month ){
+         monthList.push(item)
+       }
       })
-      let totalAmount = 0
-      records.forEach((record) => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
     })
-    .catch(e => console.log(e))
+    monthList = [...new Set(monthList)] 
+    console.log('------',monthList)
+  
+    // 比對icon並新增iconName
+    const categories = await Category.find().lean()
+    records.forEach((record) => {
+      record.iconName = categories.find(
+        (item) => item.name === record.category
+      ).icon
+    })
+
+    // 算總金額
+    let totalAmount = 0
+    records.forEach((record) => {
+      totalAmount += record.amount
+    })
+
+    return res.render('index', {
+      totalAmount,
+      records,
+      monthList
+    })
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 module.exports = router
