@@ -80,6 +80,7 @@ router.post('/', async (req, res) => {
           name: 1,
           date: 1,
           amount: 1,
+          merchant: 1,
           year: { $substr: ['$date', 0, 4] },
           month: { $substr: ['$date', 5, 2] },
           category: 1
