@@ -17,7 +17,8 @@ const RecordList = [
     name: '午餐',
     category: '餐飲食品',
     date: '2021-03-20',
-    amount: '80'
+    amount: '80',
+    merchant:'美而美'
   },
   {
     name: '捷運',
@@ -41,7 +42,8 @@ const RecordList = [
     name: '學費',
     category: '其他',
     date: '2021-03-20',
-    amount: '10000'
+    amount: '10000',
+    merchant:'Alphacamp'
   }]
 
 db.once('open', () => {
@@ -62,6 +64,7 @@ db.once('open', () => {
           category: RecordList[i].category,
           date: RecordList[i].date,
           amount: RecordList[i].amount,
+          merchant:RecordList[i].merchant,
           userId
         })
       ))

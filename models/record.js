@@ -17,6 +17,9 @@ const recordSchema = new Schema({
     get: (v) => Math.round(v),
     set: (v) => Math.round(v)
   },
+  merchant:{
+    type:String
+  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
