@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
@@ -11,7 +11,7 @@ db.once('open', () => {
       nameInChinese: '一月',
       nameInAlpha: '01'
     },
-     {
+    {
       nameInChinese: '二月',
       nameInAlpha: '02'
     },
@@ -54,7 +54,7 @@ db.once('open', () => {
     {
       nameInChinese: '十二月',
       nameInAlpha: '12'
-    },    
+    }
   ).then(() => {
     console.log('Month done!')
     return db.close()
