@@ -3,10 +3,12 @@ const Schema = mongoose.Schema
 
 const recordSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    required: true
   },
   date: {
-    type: String
+    type: Date,
+    required: true
   },
   category: {
     type: String

@@ -1,11 +1,9 @@
 const express = require('express')
 const Category = require('../../models/category')
-const Month = require('../../models/month')
+const record = require('../../models/record')
 const router = express.Router()
 const Record = require('../../models/record')
 const compareValues = require('../../public/function')
-
-let monthList = []
 
 router.get('/', async (req, res) => {
   try {
@@ -17,10 +15,12 @@ router.get('/', async (req, res) => {
           id: 1,
           name: 1,
           category: 1,
-          date: 1,
           amount: 1,
-          year: { $substr: ['$date', 0, 4] },
-          month: { $substr: ['$date', 5, 2] }
+          date: {
+            $dateToString: { format: "%Y-%m-%d", date: "$date" }
+          },
+          year: { $year: "$date" },
+          month: { $month: "$date" }
         }
       },
       {
@@ -29,18 +29,14 @@ router.get('/', async (req, res) => {
         }
       }
     ])
-    // 比對月份
-    const monthData = await Month.find().lean()
-    monthList = [] // 清除資料以防重新PUSH
-    records.forEach((record) => {
-      monthData.find((item) => {
-        if (item.nameInAlpha === record.month) {
-          monthList.push(item)
-        }
-      }
-      )
+    // 取出月份
+    let monthList = Array.from(records, record => record.month)
+    // 取出不重覆月份
+    monthList = monthList.filter((element, index, arr) => {
+      return arr.indexOf(element) === index
     })
-    monthList = [...new Set(monthList)].sort(compareValues('nameInAlpha'))
+    // 排序
+    monthList = monthList.sort((a, b) => a - b)
 
     // 比對icon並新增iconName
     const categories = await Category.find().lean()
@@ -67,9 +63,9 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+  
   const keyword = req.body.categories === '類別' ? { $ne: '' } : req.body.categories
-  const month = req.body.month === '月份' ? { $ne: '' } : req.body.month
-  console.log('keyword:', keyword, typeof (keyword), '----month', month)
+  const month = req.body.month === '月份' ? { $ne: '' } : Number(req.body.month)
   try {
     // 全部資訊
     const records = await Record.aggregate([
@@ -81,19 +77,30 @@ router.post('/', async (req, res) => {
           date: 1,
           amount: 1,
           merchant: 1,
-          year: { $substr: ['$date', 0, 4] },
-          month: { $substr: ['$date', 5, 2] },
-          category: 1
+          category: 1,
+          date: {
+            $dateToString: { format: "%Y-%m-%d", date: "$date" }
+          },
+          year: { $year: "$date" },
+          month: { $month: "$date" }
         }
       },
       {
         $match: {
           userId: req.user._id,
           month: month,
-          category: keyword
+          category: keyword,
         }
       }
     ])
+
+    let monthList = Array.from(records, record => record.month)
+    // 取出不重覆月份
+    monthList = monthList.filter((element, index, arr) => {
+      return arr.indexOf(element) === index
+    })
+    // 排序
+    monthList = monthList.sort((a, b) => a - b)
 
     const categories = await Category.find().lean()
     records.forEach((record) => {
